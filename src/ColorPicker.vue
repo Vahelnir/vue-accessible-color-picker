@@ -387,7 +387,7 @@ export default {
     this.setColorValueFromProp(this.color)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     document.removeEventListener('mousemove', this.moveThumbWithMouse)
     document.removeEventListener('touchmove', this.moveThumbWithTouch)
 
