@@ -409,6 +409,10 @@ export default {
     },
 
     stopMovingThumb () {
+      if (this.pointerOriginatedInColorSpace) {
+        const eventData = this.getEventData(this.colors, this.activeFormat)
+        this.$emit('color-change', eventData)
+      }
       this.pointerOriginatedInColorSpace = false
     },
 
@@ -668,12 +672,13 @@ export default {
     /**
      * @param {Colors} colors
      * @param {VisibleColorFormat} activeFormat
-     * @returns {{ colors: Colors, cssColor: string }}
+     * @returns {{ colors: Colors, cssColor: string, isDragging: boolean }}
      */
     getEventData (colors, activeFormat) {
       return {
         colors: { ...colors },
         cssColor: formatAsCssColor(colors[activeFormat], activeFormat),
+        isDragging: this.pointerOriginatedInColorSpace,
       }
     },
 
