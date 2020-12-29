@@ -353,12 +353,22 @@ export default {
         return visibleFormats.length > 0 && visibleFormats.every((/** @type {any} */ format) => ALLOWED_VISIBLE_FORMATS.includes(format))
       },
     },
+
+    defaultFormat: {
+      /** @type {import('vue').PropType<VisibleColorFormat>} */
+      type: (String),
+      required: false,
+      default: () => 'rgb',
+      validator (format) {
+        return ALLOWED_VISIBLE_FORMATS.includes(format)
+      },
+    },
   },
 
   data () {
     return {
       /** @type {boolean} */ pointerOriginatedInColorSpace: false,
-      /** @type {VisibleColorFormat} */ activeFormat: /** @type {VisibleColorFormat} */  ('rgb'),
+      /** @type {VisibleColorFormat} */ activeFormat: (this.defaultFormat),
       /** @type {Colors} */ colors: {
         hex: '#ffffffff',
         hsl: { h: 0, s: 0, l: 1, a: 1 },
