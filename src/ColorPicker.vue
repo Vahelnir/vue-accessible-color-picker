@@ -409,11 +409,12 @@ export default {
     },
 
     stopMovingThumb () {
-      if (this.pointerOriginatedInColorSpace) {
+      const wasDragging = this.pointerOriginatedInColorSpace
+      this.pointerOriginatedInColorSpace = false
+      if (wasDragging) {
         const eventData = this.getEventData(this.colors, this.activeFormat)
         this.$emit('color-change', eventData)
       }
-      this.pointerOriginatedInColorSpace = false
     },
 
     /**
